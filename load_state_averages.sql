@@ -1,0 +1,15 @@
+{% macro load_state_averages() %}
+COPY INTO {{ var('rawhist_db') }}.{{ var('wrk_schema') }}.state_averages_raw
+FROM (
+    SELECT
+        $1, $2, $3, $4, $5, $6, $7, $8, $9, $10,
+        $11, $12, $13, $14, $15, $16, $17, $18, $19, $20,
+        $21, $22, $23, $24, $25, $26, $27, $28, $29, $30,
+        $31, $32, $33, $34, $35, $36, $37, $38, $39, $40,
+        $41, $42, $43, $44, $45, $46, $47,
+        CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), metadata$filename, metadata$file_row_number
+    FROM @{{ var('stage_name') }}/NH_StateUSAverages_Oct2024.csv
+)
+FILE_FORMAT = (FORMAT_NAME = '{{ var("file_format_csv") }}')
+PURGE = {{ var('purge_status') }};
+{% endmacro %}
