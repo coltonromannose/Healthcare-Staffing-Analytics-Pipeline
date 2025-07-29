@@ -1,5 +1,5 @@
 {% macro load_pbj_daily_nurse_staffing() %}
-COPY INTO {{ var('rawhist_db') }}.{{ var('wrk_schema') }}.pbj_daily_nurse_staffing_raw
+COPY INTO {{ var('rawhist_db') }}.{{ var('wrk_schema') }}.PBJ_DAILY_NURSE_STAFFING_RAW
 FROM (
     SELECT
         $1 AS PROVNUM,
@@ -34,11 +34,8 @@ FROM (
         $30 AS Hrs_NAtrn_ctr,
         $31 AS Hrs_MedAide,
         $32 AS Hrs_MedAide_emp,
-        $33 AS Hrs_MedAide_ctr,
-        CURRENT_TIMESTAMP() AS INSERT_DTS,
-        CURRENT_TIMESTAMP() AS UPDATE_DTS,
-        metadata$filename AS SOURCE_FILE_NAME,
-        metadata$file_row_number AS SOURCE_FILE_ROW_NUMBER
+        $33 AS Hrs_MedAide_ctr
+
     FROM @{{ var('stage_name') }}/PBJ_Daily_Nurse_Staffing_Q2_2024.csv
 )
 FILE_FORMAT = (FORMAT_NAME = '{{ var("file_format_csv") }}')

@@ -1,7 +1,7 @@
 # Name your project! Project names should contain only lowercase characters
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
-name: 'Healthcare Staffing Project'
+name: healthcare_staffing_project 
 version: '1.0.0'
 config-version: 2
 
@@ -10,9 +10,9 @@ profile: 'default'
 
 vars:
    wrk_schema: BRONZE
-   file_format_csv: HEALTHSTAFFDB.BRONZE.MY_CSV_FORMAT
+   file_format_csv: HEALTHSTAFFDB.BRONZE.healthcare_csv_format
    purge_status: FALSE
-   stage_name: HEALTHSTAFFDB.BRONZE.MY_S3_STAGE
+   stage_name: HEALTHSTAFFDB.BRONZE.healthcare_raw_stage
    rawhist_db: HEALTHSTAFFDB
 
 # These configurations specify where dbt should look for different types of files.
@@ -42,7 +42,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 
 models:
-  walmart_project:
+  healthcare_staffing_project:
     bronze:
       schema: bronze
       materialized: view

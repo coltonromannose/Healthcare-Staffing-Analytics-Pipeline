@@ -1,5 +1,5 @@
 {% macro load_provider_info() %}
-COPY INTO {{ var('rawhist_db') }}.{{ var('wrk_schema') }}.provider_info_raw
+COPY INTO {{ var('rawhist_db') }}.{{ var('wrk_schema') }}.PROVIDER_INFO_RAW
 FROM (
     SELECT
         $1, $2, $3, $4, $5, $6, $7, $8, $9, $10,
@@ -12,7 +12,7 @@ FROM (
         $71, $72, $73, $74, $75, $76, $77, $78, $79, $80,
         $81, $82, $83, $84, $85, $86, $87, $88, $89, $90,
         $91, $92, $93, $94, $95, $96, $97, $98, $99, $100,
-        CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), metadata$filename, metadata$file_row_number
+        $101, $102, $103
     FROM @{{ var('stage_name') }}/NH_ProviderInfo_Oct2024.csv
 )
 FILE_FORMAT = (FORMAT_NAME = '{{ var("file_format_csv") }}')
